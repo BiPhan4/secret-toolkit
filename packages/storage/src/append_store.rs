@@ -10,7 +10,7 @@ use serde::{de::DeserializeOwned, Serialize};
 
 use cosmwasm_std::{ReadonlyStorage, StdError, StdResult, Storage};
 
-use secret_toolkit_serialization::{Bincode2, Serde};
+use secret_toolkit::serialization::{Bincode2, Serde};
 
 const LEN_KEY: &[u8] = b"len";
 
@@ -164,6 +164,11 @@ where
         } else {
             Err(StdError::generic_err("Can not pop from empty AppendStore"))
         }
+    }
+
+    /// Clear the collection
+    pub fn clear(&mut self) {
+        self.set_length(0);
     }
 
     /// Set the length of the collection
@@ -432,7 +437,7 @@ where
 mod tests {
     use cosmwasm_std::testing::MockStorage;
 
-    use secret_toolkit_serialization::Json;
+    use secret_toolkit::serialization::Json;
 
     use super::*;
 

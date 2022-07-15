@@ -6,7 +6,7 @@
 use std::convert::TryInto;
 use std::marker::PhantomData;
 
-use serde::{de::DeserializeOwned, Serialize};
+use secret_toolkit_serialization::{Bincode2, Serde};
 
 use cosmwasm_std::{ReadonlyStorage, StdError, StdResult, Storage};
 
@@ -437,7 +437,7 @@ where
 mod tests {
     use cosmwasm_std::testing::MockStorage;
 
-    use secret_toolkit::serialization::Json;
+    use secret_toolkit_serialization::Json;
 
     use super::*;
 

@@ -6,11 +6,11 @@
 use std::convert::TryInto;
 use std::marker::PhantomData;
 
-use secret_toolkit_serialization::{Bincode2, Serde};
+use serde::{de::DeserializeOwned, Serialize};
 
 use cosmwasm_std::{ReadonlyStorage, StdError, StdResult, Storage};
 
-use secret_toolkit::serialization::{Bincode2, Serde};
+use secret_toolkit_serialization::{Bincode2, Serde};
 
 const LEN_KEY: &[u8] = b"len";
 
@@ -339,7 +339,7 @@ where
 {
     fn clone(&self) -> Self {
         Self {
-            storage: &self.storage,
+            storage: self.storage,
             item_type: self.item_type,
             serialization_type: self.serialization_type,
             len: self.len,
